@@ -1,1 +1,12 @@
 @import "tailwindcss";
+
+body {
+    margin: 0;
+    height: 100vh;
+    background:
+    linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+    url("https://s3-figma-hubfile-images-production.figma.com/hub/file/carousel/img/012844dd547f6b5b0f79b63ce3f256e427f4dac2");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
