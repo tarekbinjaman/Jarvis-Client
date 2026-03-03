@@ -64,7 +64,7 @@ const App = () => {
     if (!finalMessage.trim()) return;
 
     try {
-      const res = await fetch("https://jarvis-20-ebon.vercel.app/chat", {
+      const res = await fetch("https://jarvis-server-1vw5.onrender.com/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ message: finalMessage }),
