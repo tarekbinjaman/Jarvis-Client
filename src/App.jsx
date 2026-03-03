@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { FaMicrophone } from "react-icons/fa";
+import { GoArrowUp } from "react-icons/go";
 
 const App = () => {
   const [message, setMessage] = useState("");
@@ -15,8 +16,7 @@ const App = () => {
     }
 
     const recognition =
-      new window.SpeechRecognition() ||
-      new window.webkitSpeechRecognition();
+      new window.SpeechRecognition() || new window.webkitSpeechRecognition();
 
     recognition.lang = "en-US";
     recognition.interimResults = false;
@@ -52,8 +52,8 @@ const App = () => {
   const speak = (text) => {
     if ("speechSynthesis" in window) {
       const utterance = new SpeechSynthesisUtterance(text);
-      utterance.rate = 1.4;
-      utterance.pitch = 6;
+      utterance.rate = 1;
+      utterance.pitch = 1;
       window.speechSynthesis.speak(utterance);
     }
   };
@@ -87,34 +87,43 @@ const App = () => {
 
   return (
     <div>
-      <h2 className="text-center text-2xl font-bold mt-5">
-        Jarvis Chat
-      </h2>
-
-      <div className="w-11/12 mx-auto mt-5">
-        <p className="text-gray-700">{response}</p>
-      </div>
-
-      <div className="fixed bottom-10 left-1/2 transform -translate-x-1/2">
-        <div className="relative">
-          <input
-            className="bg-gray-200 focus:outline-none w-96 px-4 py-3 rounded-full"
-            placeholder="Type message..."
-            value={message}
-            onChange={(e) => setMessage(e.target.value)}
-            onKeyDown={handleKeyDown}
-          />
-
-          <button
-            className={`absolute right-3 top-1/2 -translate-y-1/2 rounded-full p-3 transition ${
-              listening ? "bg-red-500" : "bg-blue-600"
-            }`}
-            onClick={toggleListening}
-          >
-            <FaMicrophone className="text-white text-xl" />
-          </button>
+      <h2 className="text-center text-2xl font-bold mt-5">Jarvis Chat</h2>
+      <div className="min-h-screen flex justify-center items-center">
+        <div className="w-11/12 mx-auto mt-5 ">
+          <p className="text-white text-center transition-all duration-75 ease-in">
+            {response}
+          </p>
         </div>
       </div>
+
+<div className="fixed bottom-10 left-1/2 transform -translate-x-1/2 w-full md:max-w-md max-w-2xl px-4">
+  <div className="relative">
+    <input
+      className="w-full bg-gray-200 md:h-24 focus:outline-none px-4 py-3 rounded-full pl-12 pr-16 md:text-2xl"
+      placeholder="Type message..."
+      value={message}
+      onChange={(e) => setMessage(e.target.value)}
+      onKeyDown={handleKeyDown}
+    />
+
+    {/* Arrow Button */}
+    <button
+    onClick={()=>sendMessage(message)}
+    className="absolute right-4 top-1/2 -translate-y-1/2 rounded-full p-3 bg-green-500 cursor-pointer hover:bg-green-700">
+      <GoArrowUp className="text-white text-4xl" />
+    </button>
+    {/* Microphone Button */}
+    <button
+      onClick={toggleListening}
+      className={`absolute right-22 top-1/2 -translate-y-1/2 rounded-full p-3 transition cursor-pointer hover:bg-blue-800 ${
+        listening ? "bg-red-500" : "bg-blue-600"
+      }`}
+    >
+      <FaMicrophone className="text-white text-4xl" />
+    </button>
+
+  </div>
+</div>
     </div>
   );
 };
