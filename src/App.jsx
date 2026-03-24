@@ -86,44 +86,55 @@ const App = () => {
   };
 
   return (
-    <div>
-      <h2 className="text-center text-2xl font-bold mt-5">Jarvis Chat</h2>
-      <div className="min-h-screen flex justify-center items-center">
-        <div className="w-11/12 mx-auto mt-5 ">
-          <p className="text-white text-center transition-all duration-75 ease-in">
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 to-black text-white flex flex-col">
+      
+      {/* Header */}
+      <h2 className="text-center text-3xl font-bold py-6 tracking-wide">
+        Jarvis Chat
+      </h2>
+
+      {/* Response Area */}
+      <div className="flex-1 flex justify-center items-center px-4">
+        <div className="w-full max-w-2xl bg-white/10 backdrop-blur-md rounded-2xl shadow-xl p-6">
+          <p className="text-center text-lg md:text-xl leading-relaxed transition-all duration-200">
             {response}
           </p>
         </div>
       </div>
 
-<div className="fixed bottom-10 left-1/2 transform -translate-x-1/2 w-full md:max-w-md max-w-2xl px-4">
-  <div className="relative">
-    <input
-      className="w-full bg-gray-200 md:h-24 focus:outline-none px-4 py-3 rounded-full pl-12 pr-16 md:text-2xl"
-      placeholder="Type message..."
-      value={message}
-      onChange={(e) => setMessage(e.target.value)}
-      onKeyDown={handleKeyDown}
-    />
+      {/* Input Area */}
+      <div className="fixed bottom-6 left-1/2 -translate-x-1/2 w-full max-w-2xl px-4">
+        <div className="relative bg-white/10 backdrop-blur-lg rounded-full shadow-lg border border-white/20">
 
-    {/* Arrow Button */}
-    <button
-    onClick={()=>sendMessage(message)}
-    className="absolute right-4 top-1/2 -translate-y-1/2 rounded-full p-3 bg-green-500 cursor-pointer hover:bg-green-700">
-      <GoArrowUp className="text-white text-4xl" />
-    </button>
-    {/* Microphone Button */}
-    <button
-      onClick={toggleListening}
-      className={`absolute right-22 top-1/2 -translate-y-1/2 rounded-full p-3 transition cursor-pointer hover:bg-blue-800 ${
-        listening ? "bg-red-500" : "bg-blue-600"
-      }`}
-    >
-      <FaMicrophone className="text-white text-4xl" />
-    </button>
+          <input
+            className="w-full bg-transparent h-16 md:h-20 focus:outline-none px-6 pr-28 text-base md:text-lg placeholder-gray-300"
+            placeholder="Type your message..."
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+            onKeyDown={handleKeyDown}
+          />
 
-  </div>
-</div>
+          {/* Microphone Button */}
+          <button
+            onClick={toggleListening}
+            className={`absolute right-16 top-1/2 -translate-y-1/2 p-3 rounded-full transition-all duration-200 shadow-md ${
+              listening
+                ? "bg-red-500 hover:bg-red-600"
+                : "bg-blue-500 hover:bg-blue-600"
+            }`}
+          >
+            <FaMicrophone className="text-white text-xl md:text-2xl" />
+          </button>
+
+          {/* Send Button */}
+          <button
+            onClick={() => sendMessage(message)}
+            className="absolute right-3 top-1/2 -translate-y-1/2 p-3 rounded-full bg-green-500 hover:bg-green-600 transition-all duration-200 shadow-md"
+          >
+            <GoArrowUp className="text-white text-xl md:text-2xl" />
+          </button>
+        </div>
+      </div>
     </div>
   );
 };
