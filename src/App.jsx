@@ -85,6 +85,10 @@ const App = () => {
     }
   };
 
+  useEffect(() => {
+    fetch('https://jarvis-20-ebon.vercel.app/ping')
+  }, [])
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 to-black text-white flex flex-col">
       
